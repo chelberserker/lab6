@@ -1,17 +1,15 @@
-input = open('input.txt', 'r')
-output = open('output.txt', 'w')
-
-k = 0
-n = input.read()
-A = input().split()
-for i in range(len(A)):
-    A[i] = int(A[i])
-for i in range(n):
-	if A[i] == 5:
-		k -= 1
-	A[i] -= 5
-	k += A[i] // 5
-
-print(k)
-	
-	
+with open('input.txt', 'r') as inp:
+    with open('output.txt', 'w') as out:
+        N = int(inp.readline())
+        lis = list(map(int, inp.readline().split()))
+        needfives = 0
+        havefives = 0
+        for i in range(N):
+            if lis[i] == 5:
+                havefives += 1
+            else:
+                havefives -= (lis[i]-5)//5
+                if havefives < 0:
+                    needfives -= havefives
+                    havefives = 0
+        print(needfives, file=out)
